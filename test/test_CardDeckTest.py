@@ -1,6 +1,9 @@
 import unittest
+
 from CardGame.Card import Card
-from CardGame.CardDeck import CardDeck, NoCardException
+from CardGame.CardDeckABC import EmptyCardDeckException
+from CardGame.CardDeck import CardDeck
+
 
 class TestCardDeck(unittest.TestCase):
 
@@ -9,13 +12,13 @@ class TestCardDeck(unittest.TestCase):
         Test the minial randomness of shuffled deckself but not true randomness.
         """
         ranks = [str(i) for i in range(2, 11)] + ['J', 'Q', 'K', 'A']
-        suits = ['hearts', 'spades', 'clubs', 'diamonds']
+        suits = ['clubs', 'diamonds', 'hearts', 'spades']
         allCards = [Card(rank, suit) for suit in suits
                                      for rank in ranks]
 
         # check whether cards in the deck is initialize collectly
         cardDeck = CardDeck()
-        allCardsFromDeck = cardDeck.getRemainingCards()
+        allCardsFromDeck = cardDeck.getAllCards()
         self.assertCountEqual(allCards, allCardsFromDeck)
         self.assertEqual(allCards, allCardsFromDeck)
 
@@ -25,7 +28,7 @@ class TestCardDeck(unittest.TestCase):
         # initial card order. But it is not 0%.
         for i in range(5000):
             cardDeck.shuffle()
-            allCardsFromDeck = cardDeck.getRemainingCards()
+            allCardsFromDeck = cardDeck.getAllCards()
             self.assertCountEqual(allCards, allCardsFromDeck)
             self.assertNotEqual(allCards, allCardsFromDeck)
 
@@ -48,7 +51,7 @@ class TestCardDeck(unittest.TestCase):
         # cardDeck is empty
         self.assertEqual(0, len(cardDeck))
 
-        with self.assertRaises(NoCardException) as cm:
+        with self.assertRaises(EmptyCardDeckException) as cm:
             cardDeck.dealOneCard()
 
         self.assertEqual("No more card to deal", str(cm.exception))
