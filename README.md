@@ -52,7 +52,3 @@ Unittest is created under 'card-game/test' directory
     * To achieve correct tests randomness needs to be tested for both methods (_[addional information](https://www.random.org/analysis/)_).
       However, it is replaced with un imcomplete heuristic test for now.
       
- ## Extention of the program
-   
-    * This application should evolved to into the _CardGames_ which would need _Players_, _Games_, etc. (Need to conditor how to design those actors)
-    * If this will be online multi player games, there is other factors need to considered. (i.e. thread safe data structure, scalability, network failures, etc)
