@@ -21,7 +21,7 @@ Sample codes for representing a deck of poker-style playing cards
  
 ## Structur of the code:
 
-There are 3 modules in CardGame packages
+### There are 3 modules in CardGame packages
  
 1. Card.py: 
     
@@ -44,11 +44,10 @@ There are 3 modules in CardGame packages
       LookupError could be used instead but using a custom exception represents the specific condition which might be handled different. 
 
     
-Unittest is created under 'card-game/test' directory  
+### Unittest is created under 'card-game/test' directory  
 
 1. test_CardDeckTest.py
     
     * test **`shuffle()`** and **`dealOneCard()`** methods in CardDeck class
     * To achieve correct tests randomness needs to be tested for both methods (_[addional information](https://www.random.org/analysis/)_).
       However, it is replaced with un imcomplete heuristic test for now.
-      
