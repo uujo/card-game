@@ -3,8 +3,8 @@ Sample codes for representing a deck of poker-style playing cards
 
 ## Runnig the test (Requires Python 3.5 or new version)
 
-* clone the this repository: `git clone https://github.com/uujo/card-game.git`
-* set the PYTHONPATH to ([cloned direrctory]/card-game/src/) and run `test_CardDeckTest.py`
+* Clone the this repository: `git clone https://github.com/uujo/card-game.git`
+* Set the PYTHONPATH to ([cloned direrctory]/card-game/src/) and run `test_CardDeckTest.py`
 
   For Mac/Linux
   ```
@@ -28,8 +28,8 @@ Sample codes for representing a deck of poker-style playing cards
     * Contains **`Card`** data structure. [collections.namedtuple](https://docs.python.org/3/library/collections.html#collections.namedtuple) is used.
       Data structure for **`Card`** is borrowed idea from [_Fluent Python_](https://www.amazon.com/Fluent-Python-Concise-Effective-Programming/dp/1491946008/ref=sr_1_2?hvadid=241675711667&hvdev=c&hvlocphy=9007779&hvnetw=g&hvpos=1t1&hvqmt=e&hvrand=12351625625351566461&hvtargid=kwd-75527750746&keywords=fluent+python&qid=1553104567&s=gateway&sr=8-2&tag=googhydr-20) 
     
-    * Putting this one in a seperate module might be overkill (This can be defined in CardDeck.py module). 
-      However, this could be replace with Card class with some supporting method if additional requirement is added.
+    * Putting **`Card`** data structure in a seperate module might be too much seperation since this can be defined inside CardDeck.py module. 
+      However, this [namedtuple](https://docs.python.org/3/library/collections.html#collections.namedtuple) could be replace with Card class with some supporting method if additional requirement is added. In that case, it might make more sense to maintain it in a separate module.
       
 2. CardDeckABC.py:
 
