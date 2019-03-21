@@ -1,7 +1,7 @@
 import unittest
 
 from CardGame.Card import Card
-from CardGame.CardDeckABC import EmptyCardDeckException
+from CardGame.CardDeckABC import EmptyCardDeckError
 from CardGame.CardDeck import CardDeck
 
 
@@ -16,16 +16,18 @@ class TestCardDeck(unittest.TestCase):
         allCards = [Card(rank, suit) for suit in suits
                                      for rank in ranks]
 
-        # check whether cards in the deck is initialize collectly
+        # Check whether cards in the deck is initialize collectly.
         cardDeck = CardDeck()
         allCardsFromDeck = cardDeck.getAllCards()
         self.assertCountEqual(allCards, allCardsFromDeck)
         self.assertEqual(allCards, allCardsFromDeck)
 
-        # check the randomness When the cards gets shuffled,
-        # there will be factorial of 52 - 52!, 8.06e+67
-        # when there will be close to 0% any of the suffled deck will match
-        # initial card order. But it is not 0%.
+        # Check the randomness When the cards get shuffled.
+        # The total possible cases are the factorial of 52 - 52!, 8.06e+67
+        #
+        # The probability of getting the same initial order of cards from 5000 samples
+        # will be close to 0% from any of the shuffled decks.
+
         for i in range(5000):
             cardDeck.shuffle()
             allCardsFromDeck = cardDeck.getAllCards()
@@ -34,8 +36,8 @@ class TestCardDeck(unittest.TestCase):
 
     def test_dealOneCard(self):
         """
-        Tests the CardDeck's dealOneCard and initialize methods.
-        Randomness of dealOneCard is not tested.
+        Tests the CardDeck's dealOneCard() and initialize() methods.
+        Randomness of dealOneCard() is not tested.
         """
         cardDeck = CardDeck()
         self.assertEqual(52, len(cardDeck))
@@ -44,19 +46,18 @@ class TestCardDeck(unittest.TestCase):
         self.assertEqual(51, len(cardDeck))
         self.assertIsInstance(card, Card)
 
-        # dealing all the remaining card
+        # Dealing all the remaining cards
         for i in range(51):
             cardDeck.dealOneCard()
 
-        # cardDeck is empty
         self.assertEqual(0, len(cardDeck))
 
-        with self.assertRaises(EmptyCardDeckException) as cm:
+        with self.assertRaises(EmptyCardDeckError) as cm:
             cardDeck.dealOneCard()
 
         self.assertEqual("No more card to deal", str(cm.exception))
 
-        # test initialize()
+        # Test initialize() method
         cardDeck.initialize()
         self.assertEqual(52, len(cardDeck))
 

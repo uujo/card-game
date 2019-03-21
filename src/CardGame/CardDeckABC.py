@@ -1,17 +1,17 @@
-import abc
+from abc import ABC, abstractmethod
 from random import randint
 
-class EmptyCardDeckException(LookupError):
+class EmptyCardDeckError(LookupError):
     """
     Custom exception class inherited from built-in LookupError
-    Exeption indicates there is no more card to deal from the deck
+    Exception indicates that there are no more cards to deal from the deck
     """
 
-class CardDeckABC(abc.ABC):
+class CardDeckABC(ABC):
     """
-    ABC for CardDeck. It requires to implement suffle() and dealOneCard() method
-    abc.ABC syntax is only works Python 3.5+
-
+    CardDeckABC is an abstract base class for CardDeck.
+    It requires its subclass to implement shuffle() and dealOneCard() methods.
+    abc.ABC syntax is added in Python 3.5
     """
 
     def __init__(self):
@@ -23,11 +23,11 @@ class CardDeckABC(abc.ABC):
     def __getitem__(self, index):
         return self.getAllCards()[index]
 
-    @abc.abstractmethod
+    @abstractmethod
     def setAllCards(self, cards):
         """
-        Assings list of cards to the poperty of object.
-        By convention this method usually called inside __init__ method
+        Assings list of cards to the property of object.
+        By convention, this method is usually called inside __init__ method.
 
         i.e. self._cards = cards
 
@@ -36,10 +36,11 @@ class CardDeckABC(abc.ABC):
         cards (list): list of objects
         """
 
-    @abc.abstractmethod
+    @abstractmethod
     def getAllCards(self):
         """
-        Resturns the property set by initialize function
+        Returns the property set by the setAllCards() method.
+
         i.e. return self._cards
 
         Returns
@@ -50,14 +51,15 @@ class CardDeckABC(abc.ABC):
 
     def shuffle(self):
         """
-        Shuffles cards in the deck using Fisher–Yates shuffle (O(n) time shuffling)
+        Shuffles cards in the deck using Fisher–Yates shuffle (O(n) time shuffling).
+
         `ref: <https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle#The_modern_algorithm>`_
         """
         deckSize = len(self.getAllCards())
         for i in range(deckSize-1, -1, -1):
             allCards = self.getAllCards()
             # randint is inclusive:
-            # randint(0, 9) selects any number between 0 to 9 including both 0 and 9
+            # randint(0, 9) selects any number between 0 to 9, including both 0 and 9
             randomIndex = randint(0, i)
             allCards[randomIndex], allCards[i] = allCards[i], allCards[randomIndex]
 
@@ -72,9 +74,9 @@ class CardDeckABC(abc.ABC):
         """
         deckSize = len(self.getAllCards())
         if deckSize == 0:
-            raise EmptyCardDeckException("No more card to deal")
+            raise EmptyCardDeckError("No more card to deal")
 
         # randint is inclusive:
-        # randint(0, 9) selects any number between 0 to 9 including both 0 and 9
+        # randint(0, 9) selects any number between 0 to 9, including both 0 and 9
         randomIndex = randint(0, deckSize - 1)
         return self.getAllCards().pop(randomIndex)
