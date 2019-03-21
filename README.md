@@ -1,7 +1,7 @@
 # card-game
 Sample codes for representing a deck of poker-style playing cards
 
-## Running the test (Requires Python 3.5 or new version)
+## Running the test (requires Python 3.5 or new version)
 
 * Clone this repository: `git clone https://github.com/uujo/card-game.git`
 * Set the PYTHONPATH to ([cloned directory]/card-game/src/) and run `test_CardDeckTest.py`
