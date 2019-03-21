@@ -3,7 +3,8 @@ from CardGame.Card import Card
 
 class CardDeck(CardDeckABC):
     """
-    Contains deck of 52 cards
+    Contains a deck of 52 cards.
+    By inherting CardDeckABC, CardDeck class provides shuffle() and dealOneCard().
 
     """
     # rank and suits are ordered by its value (ascending order)
@@ -21,8 +22,6 @@ class CardDeck(CardDeckABC):
 
     def setAllCards(self, cards):
         """
-        Set cards in the deck by given parameter cards
-
         Parameters
         ---------
         cards (list): list of Card objects
